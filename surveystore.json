@@ -1,0 +1,88 @@
+{
+  "age": {
+    "10-20": 4,
+    "20-40": 0,
+    "40-60": 0,
+    "60+": 0
+  },
+  "location": {
+    "Brands": 2,
+    "Malls": 1,
+    "Online": 0,
+    "Supermarkets": 0,
+    "Other": 0
+  },
+  "frequency": {
+    "Daily": 3,
+    "Few times a week": 0,
+    "Occasionally": 0,
+    "Rarely": 0,
+    "Never": 0
+  },
+  "reason": {
+    "Personal hygiene": 3,
+    "Social occasions": 0,
+    "Professional settings": 0,
+    "Self-confidence": 0,
+    "Other": 0
+  },
+  "problems": {
+    "Too expensive": 3,
+    "Not portable": 0,
+    "Runs out quickly": 0,
+    "No problems": 0,
+    "Other": 0
+  },
+  "would_use": {
+    "Definitely": 3,
+    "Probably": 0,
+    "Not sure": 0,
+    "Probably not": 0,
+    "Definitely not": 0
+  },
+  "installation": {
+    "Malls": 3,
+    "Gyms": 0,
+    "Public restrooms": 0,
+    "Office buildings": 0,
+    "Other": 1
+  },
+  "test_public": {
+    "Yes": 3,
+    "No": 0,
+    "Maybe": 0
+  },
+  "suggestions": [
+    {
+      "id": 1762094834150,
+      "text": "x x",
+      "flagged": false,
+      "flagReason": ""
+    },
+    {
+      "id": 1762101992114,
+      "text": "xdv",
+      "flagged": false,
+      "flagReason": ""
+    },
+    {
+      "id": 1762104637060,
+      "text": "dfg",
+      "flagged": false,
+      "flagReason": ""
+    },
+    {
+      "id": 1762105854490,
+      "text": "xcx",
+      "flagged": false,
+      "flagReason": ""
+    },
+    {
+      "id": 1762108957528,
+      "text": "Test email removal",
+      "flagged": false,
+      "flagReason": ""
+    }
+  ],
+  "formCount": 5
+}

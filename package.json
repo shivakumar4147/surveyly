@@ -1,0 +1,15 @@
+{
+  "name": "surveyly-plus",
+  "version": "1.0.0",
+  "description": "Perfume Vending Machine Survey - Supabase Integrated",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.78.0",
+    "dotenv": "^17.2.3"
+  }
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume Vending Machine Survey</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Perfume Vending Machine Survey</h1>
+            <p>Help us understand your perfume preferences and needs</p>
+            <div class="form-stats">
+                <span id="form-count">Forms filled: 0</span>
+            </div>
+            <!-- Product Image Section (moved below form filled display) -->
+            <section id="product-section" aria-label="Product image">
+                <h3>Product</h3>
+                <div class="product-image-container">
+                    <img id="product-image" src="Untitleddesign222.png" alt="Product image" loading="lazy">
+                </div>
+            </section>
+            <div class="header-buttons">
+                <button id="view-graph-btn">View Results Graph</button>
+                <button id="add-question-btn">Add New Question</button>
+                <button id="open-question-bank-btn">Question Bank</button>
+                <button id="version-history-btn">Version History</button>
+            </div>
+        </header>
+
+        <div id="survey-container" class="active">
+            <form id="survey-form">
+                <div class="question">
+                    <h3>1. What is your age group?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="age" value="10-20"> 10-20 years</label>
+                        <label><input type="radio" name="age" value="20-40"> 20-40 years</label>
+                        <label><input type="radio" name="age" value="40-60"> 40-60 years</label>
+                        <label><input type="radio" name="age" value="60+"> 60+ years</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>2. Where do you usually buy perfumes?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="location" value="Brands"> Brand stores</label>
+                        <label><input type="radio" name="location" value="Malls"> Malls</label>
+                        <label><input type="radio" name="location" value="Online"> Online</label>
+                        <label><input type="radio" name="location" value="Supermarkets"> Supermarkets</label>
+                        <label><input type="radio" name="location" value="Other"> Other</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>3. How often do you use perfumes?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="frequency" value="Daily"> Daily</label>
+                        <label><input type="radio" name="frequency" value="Few times a week"> Few times a week</label>
+                        <label><input type="radio" name="frequency" value="Occasionally"> Occasionally</label>
+                        <label><input type="radio" name="frequency" value="Rarely"> Rarely</label>
+                        <label><input type="radio" name="frequency" value="Never"> Never</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>4. Why do you use perfumes?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="reason" value="Personal hygiene"> Personal hygiene</label>
+                        <label><input type="radio" name="reason" value="Social occasions"> Social occasions</label>
+                        <label><input type="radio" name="reason" value="Professional settings"> Professional settings</label>
+                        <label><input type="radio" name="reason" value="Self-confidence"> Self-confidence</label>
+                        <label><input type="radio" name="reason" value="Other"> Other</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>5. What problems have you faced with perfumes outside?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="problems" value="Too expensive"> Too expensive</label>
+                        <label><input type="radio" name="problems" value="Not portable"> Not portable</label>
+                        <label><input type="radio" name="problems" value="Runs out quickly"> Runs out quickly</label>
+                        <label><input type="radio" name="problems" value="No problems"> No problems</label>
+                        <label><input type="radio" name="problems" value="Other"> Other</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>6. Would you use a ₹5 per spray perfume vending machine?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="would_use" value="Definitely"> Definitely</label>
+                        <label><input type="radio" name="would_use" value="Probably"> Probably</label>
+                        <label><input type="radio" name="would_use" value="Not sure"> Not sure</label>
+                        <label><input type="radio" name="would_use" value="Probably not"> Probably not</label>
+                        <label><input type="radio" name="would_use" value="Definitely not"> Definitely not</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>7. Where would you prefer to see these vending machines installed?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="installation" value="Malls"> Malls</label>
+                        <label><input type="radio" name="installation" value="Gyms"> Gyms</label>
+                        <label><input type="radio" name="installation" value="Public restrooms"> Public restrooms</label>
+                        <label><input type="radio" name="installation" value="Office buildings"> Office buildings</label>
+                        <label><input type="radio" name="installation" value="Other"> Other</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <h3>8. Would you test using a public perfume vending machine?</h3>
+                    <div class="options">
+                        <label><input type="radio" name="test_public" value="Yes"> Yes</label>
+                        <label><input type="radio" name="test_public" value="No"> No</label>
+                        <label><input type="radio" name="test_public" value="Maybe"> Maybe</label>
+                    </div>
+                </div>
+
+               
+
+                <button type="submit" id="submit-btn">Submit Survey</button>
+            </form>
+        </div>
+
+        <div id="results-container">
+            <h2>Survey Results</h2>
+            <div class="results-nav">
+                <button class="result-btn active" data-question="age">Age Group</button>
+                <button class="result-btn" data-question="location">Purchase Location</button>
+                <button class="result-btn" data-question="frequency">Usage Frequency</button>
+                <button class="result-btn" data-question="reason">Usage Reason</button>
+                <button class="result-btn" data-question="problems">Problems</button>
+                <button class="result-btn" data-question="would_use">Would Use</button>
+                <button class="result-btn" data-question="installation">Installation</button>
+                <button class="result-btn" data-question="test_public">Test Public</button>
+            </div>
+            <div class="chart-container">
+                <canvas id="results-chart"></canvas>
+            </div>
+            
+            <!-- Export Analytics Section -->
+            <div id="export-analytics">
+                <h3>Export Analytics</h3>
+                <div class="export-buttons">
+                    <button id="export-pdf" class="export-btn">Export as PDF</button>
+                    <button id="export-csv" class="export-btn">Export as CSV</button>
+                    <button id="export-excel" class="export-btn">Export as Excel</button>
+                    <button id="export-word" class="export-btn">Export as Word</button>
+                </div>
+            </div>
+            
+            <div id="suggestions-container">
+                <h3>Suggestions & Feedback</h3>
+                <div id="suggestions-list"></div>
+            </div>
+            
+            <!-- Per-question Feedback Section (for text questions) placed under Export Analytics -->
+            <div id="question-feedback-container" style="display:none;">
+                <h3 id="question-feedback-title">Feedback</h3>
+                <div id="question-feedback-list"></div>
+            </div>
+            <button id="back-to-survey">Back to Survey</button>
+        </div>
+    </div>
+
+    <!-- Modal for adding new questions -->
+    <div id="add-question-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Add New Question</h2>
+            <form id="add-question-form">
+                <div class="form-group">
+                    <label for="question-text">Question Text:</label>
+                    <input type="text" id="question-text" name="question-text" required>
+                </div>
+                <div class="form-group">
+                    <label for="question-type">Question Type:</label>
+                    <select id="question-type" name="question-type">
+                        <option value="radio">Multiple Choice</option>
+                        <option value="text">Write Option</option>
+                    </select>
+                </div>
+                <div class="form-group" id="options-group">
+                    <label id="options-label">Options:</label>
+                    <div id="options-container"></div>
+                    <small class="hint">Press Enter in an option to add another</small>
+                </div>
+                <div class="form-group" id="text-answer-group" style="display:none;">
+                    <label for="text-answer-placeholder">Answer Box:</label>
+                    <input type="text" id="text-answer-placeholder" placeholder="Single written answer" />
+                </div>
+                <div class="form-group">
+                    <label>Add question to:</label>
+                    <div class="radio-group">
+                        <label>
+                            <input type="radio" name="question-destination" value="form" checked>
+                            Add to Form
+                        </label>
+                        <label>
+                            <input type="radio" name="question-destination" value="bank">
+                            Question Bank Only
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="add-to-bank">
+                        <input type="checkbox" id="add-to-bank" name="add-to-bank">
+                        Also save to Question Bank
+                    </label>
+                </div>
+                <button type="submit">Add Question</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal for delete confirmation with password -->
+    <div id="delete-confirm-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Confirm Deletion</h2>
+            <p>Please enter the admin password to delete this question:</p>
+            <div class="form-group">
+                <input type="password" id="delete-password" placeholder="Enter password" required>
+            </div>
+            <div class="form-actions">
+                <button id="confirm-delete-btn" class="danger-btn">Delete</button>
+                <button id="cancel-delete-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for question bank -->
+    <div id="question-bank-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Question Bank</h2>
+            <div class="question-bank-controls">
+                <button id="save-to-bank-btn">Save Current Question</button>
+                <input type="text" id="bank-search" placeholder="Search questions...">
+            </div>
+            <div id="question-bank-list">
+                <!-- Question bank items will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for version history -->
+    <div id="version-history-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Version History</h2>
+            <div id="version-list">
+                <!-- Version history items will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
